@@ -5,41 +5,65 @@
 @import 'tailwindcss';
 
 /* ---- Google Fonts (self-hosted via Fontsource) ---- */
-@import '@fontsource/playfair-display/400.css';
-@import '@fontsource/playfair-display/600.css';
-@import '@fontsource/playfair-display/700.css';
+@import '@fontsource-variable/playfair-display';
 @import '@fontsource/lato/300.css';
 @import '@fontsource/lato/400.css';
 @import '@fontsource/lato/700.css';
 
-/* ---- Design Tokens ---- */
+@theme {
+  --color-green-darkest: #0F2D1E;
+  --color-green-dark: #1B4332;
+  --color-green-primary: #2D6A4F;
+  --color-green-mid: #40916C;
+  --color-green-light: #52B788;
+  --color-green-pale: #D8F3DC;
+
+  --color-gold: #D4A843;
+  --color-gold-dark: #B8892A;
+  --color-gold-light: #F0C965;
+
+  --color-cream: #FDF8ED;
+  --color-cream-dark: #F5EDD6;
+  --color-earth: #8B7355;
+  --color-earth-dark: #5C4A2A;
+  --color-white-warm: #FAFAF8;
+
+  --color-text-dark: #1A1A1A;
+  --color-text-mid: #4A4A4A;
+  --color-text-light: #7A7A7A;
+
+  --font-serif: 'Playfair Display Variable', Georgia, serif;
+  --font-sans: 'Lato', system-ui, sans-serif;
+}
+
+/* ---- Design Tokens (Backwards Compatibility) ---- */
 :root {
   /* Brand Greens */
-  --green-darkest: #0F2D1E;
-  --green-dark:    #1B4332;
-  --green-primary: #2D6A4F;
-  --green-mid:     #40916C;
-  --green-light:   #52B788;
-  --green-pale:    #D8F3DC;
+  --green-darkest: var(--color-green-darkest);
+  --green-dark:    var(--color-green-dark);
+  --green-primary: var(--color-green-primary);
+  --green-mid:     var(--color-green-mid);
+  --green-light:   var(--color-green-light);
+  --green-pale:    var(--color-green-pale);
 
   /* Brand Gold */
-  --gold:          #D4A843;
-  --gold-dark:     #B8892A;
-  --gold-light:    #F0C965;
+  --gold:          var(--color-gold);
+  --gold-dark:     var(--color-gold-dark);
+  --gold-light:    var(--color-gold-light);
 
   /* Neutrals */
-  --cream:         #FDF8ED;
-  --cream-dark:    #F5EDD6;
-  --earth:         #8B7355;
-  --earth-dark:    #5C4A2A;
-  --white-warm:    #FAFAF8;
-  --text-dark:     #1A1A1A;
-  --text-mid:      #4A4A4A;
-  --text-light:    #7A7A7A;
+  --cream:         var(--color-cream);
+  --cream-dark:    var(--color-cream-dark);
+  --earth:         var(--color-earth);
+  --earth-dark:    var(--color-earth-dark);
+  --white-warm:    var(--color-white-warm);
+  --text-dark:     var(--color-text-dark);
+  --text-mid:      var(--color-text-mid);
+  --text-light:    var(--color-text-light);
 
   /* Typography */
-  --font-serif:    'Playfair Display', Georgia, serif;
-  --font-sans:     'Lato', system-ui, sans-serif;
+  --font-serif:    var(--font-serif);
+  --font-sans:     var(--font-sans);
 
   /* Spacing */
   --nav-height:    72px;
