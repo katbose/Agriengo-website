@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { MARKETPLACES } from '../lib/constants';
+---
+
+<BaseLayout
+  title="Where to Buy"
+  description="Buy AGRIENGO™ Premium Vermi Compost on Amazon, Flipkart, Blinkit, Zepto, BigBasket, and Swiggy Instamart."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title reveal">Where to Buy</h1>
+      <p class="page-subtitle reveal">Order online for fast delivery directly to your doorstep. Choose your preferred platform below.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      
+      <!-- Ecommerce -->
+      <div class="marketplace-group reveal">
+        <h2 class="marketplace-category">E-Commerce Platforms</h2>
+        <div class="marketplace-grid">
+          {MARKETPLACES.filter(m => m.type === 'ecommerce').map(platform => (
+            <a href={platform.url} target="_blank" rel="noopener noreferrer" class="marketplace-card">
+              <div class="marketplace-icon">{platform.icon}</div>
+              <div class="marketplace-info">
+                <h3 class="marketplace-name">{platform.name}</h3>
+                <p class="marketplace-desc">{platform.description}</p>
+              </div>
+              <div class="marketplace-action">
+                <span class="btn btn--gold btn--sm">Buy Now</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="divider reveal" style="margin-block: 4rem auto;"></div>
+
+      <!-- Quick Commerce -->
+      <div class="marketplace-group reveal">
+        <h2 class="marketplace-category">Quick Commerce (10-Minute Delivery)</h2>
+        <div class="marketplace-grid">
+          {MARKETPLACES.filter(m => m.type === 'quick').map(platform => (
+            <a href={platform.url} target="_blank" rel="noopener noreferrer" class="marketplace-card">
+              <div class="marketplace-icon">{platform.icon}</div>
+              <div class="marketplace-info">
+                <h3 class="marketplace-name">{platform.name}</h3>
+                <p class="marketplace-desc">{platform.description}</p>
+              </div>
+              <div class="marketplace-action">
+                <span class="btn btn--gold btn--sm">Buy Now</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Direct Contact CTA -->
+      <div class="bulk-order-cta reveal">
+        <h3>Need Bulk Orders?</h3>
+        <p>For farm orders or quantities above 50kg, please contact our consumer cell.</p>
+        <a href="/contact" class="btn btn--green">Contact Us</a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-header {
+  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
+  padding-top: calc(var(--nav-height) + 4rem);
+  padding-bottom: 4rem;
+  text-align: center;
+}
+
+.page-title {
+  color: var(--green-darkest);
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  max-width: 600px;
+  margin-inline: auto;
+  font-size: 1.125rem;
+}
+
+.marketplace-group {
+  margin-bottom: 3rem;
+}
+
+.marketplace-category {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--green-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.marketplace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.marketplace-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--white-warm);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  text-decoration: none;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.marketplace-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--gold);
+}
+
+.marketplace-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  background: var(--green-pale);
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.marketplace-info {
+  flex: 1;
+}
+
+.marketplace-name {
+  font-size: 1.125rem;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+}
+
+.marketplace-desc {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+.marketplace-action {
+  flex-shrink: 0;
+}
+
+.bulk-order-cta {
+  background: var(--white-warm);
+  padding: 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 4rem auto 0;
+  border: 1px dashed var(--green-light);
+}
+
+.bulk-order-cta h3 {
+  font-size: 1.5rem;
+  color: var(--green-dark);
+  margin-bottom: 0.5rem;
+}
+
+.bulk-order-cta p {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .marketplace-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .marketplace-action {
+    width: 100%;
+  }
+  .marketplace-action .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>

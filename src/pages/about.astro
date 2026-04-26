@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BRAND } from '../lib/constants';
+---
+
+<BaseLayout
+  title="About Us"
+  description="Learn about the mission and story behind AGRIENGO™ — The Agri Engineer Organic Farms."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title reveal">Our Story</h1>
+      <p class="page-subtitle reveal">Building healthier soil for a sustainable future.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      
+      <div class="about-grid">
+        <div class="about-content reveal">
+          <h2 class="section-heading">The Agri Engineer Organic Farms</h2>
+          <p class="lead-text">
+            AGRIENGO™ was founded on a simple principle: healthy food starts with healthy soil.
+          </p>
+          <div class="about-text-body">
+            <p>
+              In a world increasingly reliant on chemical fertilizers that deplete our land over time, we recognized the urgent need to return to nature's original method of soil enrichment.
+            </p>
+            <p>
+              Through careful research and natural processes, we've perfected the art of vermicomposting. Our Grade-A NPK enriched vermicompost is produced in controlled environments to ensure the highest quality, consistency, and nutrient density.
+            </p>
+            <p>
+              Whether you're nurturing a small balcony garden or managing agricultural land, our mission is to provide you with the finest organic inputs that promote vigorous plant growth while restoring the earth's natural balance.
+            </p>
+          </div>
+          
+          <div class="mission-box mt-4">
+            <h3>Our Mission</h3>
+            <p>To make premium organic farming inputs accessible to everyone, empowering individuals to grow healthier plants and contribute to a greener planet.</p>
+          </div>
+        </div>
+
+        <div class="about-image-col reveal" style="transition-delay: 0.2s">
+          <div class="image-stack">
+            <div class="img-frame img-frame-1">
+               <img src="/images/products/vermicompost-5kg.png" alt="AGRIENGO Vermicompost" class="img-fluid" />
+            </div>
+            <div class="badge-overlay">
+              <div class="cert-badge">
+                <span class="cert-icon">🌿</span>
+                <span class="cert-text">100% Organic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container text-center">
+      <h2 class="section-heading reveal">Our Core Values</h2>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">🌍</div>
+          <h4>Sustainability</h4>
+          <p>We believe in farming practices that give back to the earth rather than taking from it.</p>
+        </div>
+        <div class="value-card reveal" style="transition-delay: 0.1s">
+          <div class="value-icon">🔬</div>
+          <h4>Quality</h4>
+          <p>Every batch of our compost undergoes rigorous testing to ensure Grade-A NPK levels.</p>
+        </div>
+        <div class="value-card reveal" style="transition-delay: 0.2s">
+          <div class="value-icon">🤝</div>
+          <h4>Community</h4>
+          <p>Supporting local farmers and home gardeners in their organic journey.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-header {
+  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
+  padding-top: calc(var(--nav-height) + 4rem);
+  padding-bottom: 4rem;
+  text-align: center;
+}
+
+.page-title {
+  color: var(--green-darkest);
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  max-width: 600px;
+  margin-inline: auto;
+  font-size: 1.125rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.lead-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--green-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.about-text-body p {
+  margin-bottom: 1.25rem;
+  font-size: 1.0625rem;
+}
+
+.mission-box {
+  background: var(--green-pale);
+  padding: 2rem;
+  border-radius: 1rem;
+  border-left: 4px solid var(--green-primary);
+}
+
+.mission-box h3 {
+  color: var(--green-dark);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-sans);
+}
+
+.mission-box p {
+  color: var(--green-darkest);
+  margin: 0;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.image-stack {
+  position: relative;
+  padding: 2rem;
+}
+
+.img-frame {
+  background: var(--white-warm);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.badge-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  transform: translate(-10%, 20%);
+}
+
+.cert-badge {
+  background: var(--gold);
+  color: var(--green-darkest);
+  padding: 1rem 1.5rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(212,168,67,0.4);
+}
+
+.cert-icon {
+  font-size: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.value-card {
+  background: var(--white-warm);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border-top: 3px solid var(--gold);
+}
+
+.value-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.value-card h4 {
+  color: var(--green-dark);
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+  .badge-overlay {
+    transform: translate(0, 0);
+    bottom: -1rem;
+    right: 1rem;
+  }
+}
+</style>

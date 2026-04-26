@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BRAND } from '../lib/constants';
+---
+
+<BaseLayout
+  title="Terms & Conditions"
+  description="Terms and Conditions for using the AGRIENGO™ website."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title reveal">Terms & Conditions</h1>
+      <p class="page-subtitle reveal">Please read these terms carefully before using our website.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container max-w-content prose reveal">
+      <h2>1. Introduction</h2>
+      <p>Welcome to {BRAND.name}. These Terms and Conditions govern your use of our website located at {BRAND.site}.</p>
+      <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use {BRAND.name} if you do not agree to take all of the terms and conditions stated on this page.</p>
+
+      <h2>2. Intellectual Property Rights</h2>
+      <p>Other than the content you own, under these Terms, {BRAND.fullName} and/or its licensors own all the intellectual property rights and materials contained in this Website. <strong>{BRAND.trademark}</strong>.</p>
+      <p>You are granted a limited license only for purposes of viewing the material contained on this Website.</p>
+
+      <h2>3. Restrictions</h2>
+      <p>You are specifically restricted from all of the following:</p>
+      <ul>
+        <li>Publishing any Website material in any other media without credit;</li>
+        <li>Selling, sublicensing, and/or otherwise commercializing any Website material;</li>
+        <li>Using this Website in any way that is or may be damaging to this Website;</li>
+        <li>Using this Website in any way that impacts user access to this Website.</li>
+      </ul>
+
+      <h2>4. Limitation of Liability</h2>
+      <p>In no event shall {BRAND.fullName}, nor any of its officers, directors, and employees, be held liable for anything arising out of or in any way connected with your use of this Website.</p>
+
+      <h2>5. Variation of Terms</h2>
+      <p>{BRAND.fullName} is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review these Terms on a regular basis.</p>
+
+      <h2>6. Governing Law & Jurisdiction</h2>
+      <p>These Terms will be governed by and interpreted in accordance with the laws of India, and you submit to the non-exclusive jurisdiction of the state and federal courts located in India for the resolution of any disputes.</p>
+
+      <p style="margin-top: 3rem; font-style: italic;">Last updated: April 2026</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-header {
+  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
+  padding-top: calc(var(--nav-height) + 4rem);
+  padding-bottom: 3rem;
+  text-align: center;
+}
+
+.page-title {
+  color: var(--green-darkest);
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  max-width: 600px;
+  margin-inline: auto;
+  font-size: 1.125rem;
+}
+
+.max-w-content {
+  max-width: 800px;
+  margin-inline: auto;
+  background: var(--white-warm);
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+}
+
+.prose h2 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  color: var(--green-dark);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2:first-of-type {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+  color: var(--text-mid);
+}
+
+.prose ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  color: var(--text-mid);
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+</style>

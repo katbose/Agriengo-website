@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Expert advice on organic farming, gardening tips, and the science behind vermicompost."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title reveal">Knowledge Hub</h1>
+      <p class="page-subtitle reveal">Tips, guides, and expert advice for organic gardening.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        {posts.map((post, index) => (
+          <a href={`/blog/${post.slug}`} class="blog-card reveal" style={`transition-delay: ${index * 0.1}s`}>
+            <div class="blog-image-wrap">
+              <!-- Placeholder for blog images -->
+              <div class="blog-placeholder-image">
+                 <span class="blog-icon">🌿</span>
+              </div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="blog-date">
+                  {post.data.pubDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </span>
+              </div>
+              <h3 class="blog-title">{post.data.title}</h3>
+              <p class="blog-desc">{post.data.description}</p>
+              <div class="blog-tags">
+                {post.data.tags.slice(0, 2).map(tag => (
+                  <span class="blog-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.page-header {
+  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
+  padding-top: calc(var(--nav-height) + 4rem);
+  padding-bottom: 4rem;
+  text-align: center;
+}
+
+.page-title {
+  color: var(--green-darkest);
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  max-width: 600px;
+  margin-inline: auto;
+  font-size: 1.125rem;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white-warm);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  text-decoration: none;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+}
+
+.blog-image-wrap {
+  aspect-ratio: 16/9;
+  background: var(--green-pale);
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--green-pale), var(--cream-dark));
+}
+
+.blog-icon {
+  font-size: 4rem;
+  opacity: 0.5;
+}
+
+.blog-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blog-meta {
+  font-size: 0.8125rem;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.blog-title {
+  font-size: 1.25rem;
+  color: var(--green-darkest);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.blog-desc {
+  font-size: 0.9375rem;
+  color: var(--text-mid);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.blog-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.blog-tag {
+  font-size: 0.75rem;
+  background: var(--cream);
+  color: var(--green-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+</style>
