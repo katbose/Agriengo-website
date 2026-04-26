@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/global/Navbar.astro';
 import Footer from '../components/global/Footer.astro';
+import { SEO } from 'astro-seo';
 
 interface Props {
   title: string;
@@ -48,24 +49,29 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1B4332" />
 
-    <!-- Primary Meta -->
-    <title>{title} | AGRIENGO™</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={`${title} | AGRIENGO™`} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
-    <meta property="og:site_name" content="AGRIENGO™" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | AGRIENGO™`} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+    <SEO
+      title={`${title} | AGRIENGO™`}
+      description={description}
+      canonical={canonicalUrl}
+      openGraph={{
+        basic: {
+          title: `${title} | AGRIENGO™`,
+          type: "website",
+          image: `${siteUrl}${ogImage}`,
+          url: canonicalUrl
+        },
+        optional: {
+          description: description,
+          siteName: "AGRIENGO™"
+        }
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: `${title} | AGRIENGO™`,
+        description: description,
+        image: `${siteUrl}${ogImage}`
+      }}
+    />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -83,6 +89,7 @@ const jsonLd = {
 
     <!-- Scroll Reveal -->
     <script>
+      // Scroll Reveal Observer
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
