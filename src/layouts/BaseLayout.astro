@@ -79,6 +79,16 @@ const jsonLd = {
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Performance: LCP Preload -->
+    {Astro.url.pathname === '/' && (
+      <link 
+        rel="preload" 
+        as="image" 
+        href="/images/products/adriengo_vermiCompost_1kg.png" 
+        fetchpriority="high" 
+      />
+    )}
   </head>
   <body>
     <Navbar />

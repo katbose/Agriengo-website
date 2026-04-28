@@ -1,12 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PRODUCTS } from '../lib/constants';
+
+const productSchema = PRODUCTS.map(p => ({
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": p.name,
+  "image": `https://www.agriengo.in/images/products/adriengo_vermiCompost_1kg.png`,
+  "description": p.description,
+  "brand": {
+    "@type": "Brand",
+    "name": "AGRIENGO™"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": `https://www.agriengo.in/where-to-buy`,
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+}));
 ---
 
 <BaseLayout
   title="Products"
   description="Explore AGRIENGO™ Premium Vermi Compost. Available in 1kg, 2kg, and 5kg packs. Lab-tested organic fertiliser."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <div class="page-header">
     <div class="container">
       <h1 class="page-title reveal">Our Products</h1>

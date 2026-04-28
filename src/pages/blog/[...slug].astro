@@ -21,6 +21,28 @@ const formatDate = (date: Date) => {
     year: 'numeric'
   });
 };
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "image": post.data.heroImage ? `https://www.agriengo.in${post.data.heroImage}` : undefined,
+  "datePublished": post.data.pubDate.toISOString(),
+  "author": [{
+    "@type": "Person",
+    "name": post.data.author,
+    "jobTitle": "Agronomist"
+  }],
+  "publisher": {
+    "@type": "Organization",
+    "name": "AGRIENGO™",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.agriengo.in/images/logo/agriengo-logo.png"
+    }
+  },
+  "description": post.data.description
+};
 ---
 
 <BaseLayout 
@@ -28,6 +50,7 @@ const formatDate = (date: Date) => {
   description={post.data.description}
   ogImage={post.data.heroImage}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <article class="post-layout">
     <header class="post-header">
       <div class="container container--narrow">
