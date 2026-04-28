@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://www.agriengo.in',
@@ -13,5 +12,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  adapter: cloudflare(),
 });
