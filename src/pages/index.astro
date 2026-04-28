@@ -226,22 +226,34 @@ import Icon from '../components/global/Icon.astro';
   </section>
 
   <script>
-    import { gsap } from 'gsap';
+    import gsap from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
     gsap.registerPlugin(ScrollTrigger);
 
     // Hero Animations
-    window.addEventListener('load', () => {
-      const tl = gsap.timeline();
+    const initHero = () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       
-      tl.from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' })
-        .from('.hero-headline', { opacity: 0, y: 30, duration: 1, ease: 'power3.out' }, '-=0.4')
-        .from('.hero-sub', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-        .from('.hero-actions .btn', { opacity: 0, scale: 0.9, stagger: 0.2, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.4')
-        .from('.hero-badge', { opacity: 0, x: -20, stagger: 0.1, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-        .from('.hero-image-wrap', { opacity: 0, x: 50, duration: 1.2, ease: 'power3.out' }, '-=1');
-    });
+      tl.from('.hero-eyebrow', { opacity: 0, y: 15, duration: 0.5 })
+        .from('.hero-headline', { opacity: 0, y: 20, duration: 0.7 }, '-=0.2')
+        .from('.hero-sub', { opacity: 0, y: 15, duration: 0.5 }, '-=0.4')
+        .from('.hero-actions .btn', { 
+          opacity: 0, 
+          y: 15, 
+          stagger: 0.1, 
+          duration: 0.5, 
+          clearProps: "all" 
+        }, '-=0.2')
+        .from('.hero-badge', { opacity: 0, x: -10, stagger: 0.05, duration: 0.4 }, '-=0.2')
+        .from('.hero-image-wrap', { opacity: 0, x: 30, duration: 0.8 }, '-=0.6');
+    };
+
+    if (document.readyState === 'complete') {
+      initHero();
+    } else {
+      window.addEventListener('load', initHero);
+    }
 
     // Staggered reveals for benefit cards
     gsap.from('.benefit-card', {
@@ -328,9 +340,11 @@ import Icon from '../components/global/Icon.astro';
 
 .hero-actions {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .hero-badges {
@@ -823,11 +837,17 @@ import Icon from '../components/global/Icon.astro';
   .hero-actions { justify-content: center; }
   .hero-badges { justify-content: center; }
   .hero-image-wrap { display: none; }
+  .hero-sub { margin-inline: auto; }
   .products-grid { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .cta-banner__inner { flex-direction: column; text-align: center; }
   .lab-grid { grid-template-columns: 1fr; gap: 2rem; }
   .lab-visual { order: -1; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 600px) {

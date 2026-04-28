@@ -1,219 +1,201 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/global/Icon.astro';
 import { CONTACT, SOCIAL } from '../lib/constants';
 ---
 
-<BaseLayout
-  title="Contact Us"
-  description="Get in touch with the AGRIENGO™ Consumer Wellness Cell for bulk orders, farm consulting, and product support."
+<BaseLayout 
+  title="Contact Us" 
+  description="Get in touch with AGRIENGO™ for product inquiries, wholesale orders, or gardening support."
 >
-  <div class="page-header">
+  <section class="page-hero">
     <div class="container">
-      <h1 class="page-title reveal">Contact Us</h1>
-      <p class="page-subtitle reveal">We're here to help you grow. Reach out to our Consumer Wellness Cell.</p>
+      <p class="section-label reveal">Support & Inquiries</p>
+      <h1 class="hero-title reveal">How Can We<br/><span class="text-gold">Help You Grow?</span></h1>
+      <p class="hero-sub reveal">Our agronomists and support team are ready to assist you with any questions about soil health or our products.</p>
     </div>
-  </div>
+  </section>
 
   <section class="section">
     <div class="container">
       <div class="contact-grid">
-        
-        <!-- Contact Info -->
-        <div class="contact-info-wrap reveal">
-          <h2 class="section-heading">Get in Touch</h2>
-          <p class="mb-4">Whether you have questions about our products, need advice on application, or want to discuss bulk orders, our team is ready to assist you.</p>
-
-          <div class="contact-details">
-            <div class="detail-item">
-              <div class="detail-icon">📞</div>
-              <div class="detail-content">
-                <h4>Phone</h4>
-                <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a>
-              </div>
-            </div>
+        <div class="contact-info reveal">
+          <div class="info-group">
+            <h2 class="info-title">Consumer Wellness Cell</h2>
+            <p class="info-desc">For general inquiries, gardening tips, and order tracking support.</p>
             
-            <div class="detail-item">
-              <div class="detail-icon">✉️</div>
-              <div class="detail-content">
-                <h4>Email</h4>
-                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-              </div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-icon">🏢</div>
-              <div class="detail-content">
-                <h4>Consumer Wellness Cell</h4>
-                <p>The Agri Engineer Organic Farms<br/>India</p>
-              </div>
-            </div>
+            <ul class="contact-methods">
+              <li>
+                <div class="method-icon"><Icon name="external-link" width="20" height="20" /></div>
+                <div class="method-details">
+                  <span class="method-label">Email Us</span>
+                  <a href={`mailto:${CONTACT.email}`} class="method-value">{CONTACT.email}</a>
+                </div>
+              </li>
+              <li>
+                <div class="method-icon"><Icon name="arrow-right" width="20" height="20" /></div>
+                <div class="method-details">
+                  <span class="method-label">Call / WhatsApp</span>
+                  <a href={`tel:${CONTACT.phone}`} class="method-value">{CONTACT.phone}</a>
+                </div>
+              </li>
+            </ul>
           </div>
 
-          <h3 class="follow-heading">Follow Us</h3>
-          <div class="social-pills">
-            {SOCIAL.map(s => (
-              <a href={s.url} target="_blank" rel="noopener noreferrer" class="social-pill">
-                {s.name}
-              </a>
-            ))}
+          <div class="info-group">
+            <h2 class="info-title">Connect with Us</h2>
+            <div class="social-grid">
+              {SOCIAL.map(s => (
+                <a href={s.url} target="_blank" rel="noopener" class="social-card" aria-label={`Follow on ${s.name}`}>
+                  <Icon name={s.icon} width="24" height="24" />
+                  <span>{s.name}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        <!-- Contact Form -->
-        <div class="contact-form-wrap reveal" style="transition-delay: 0.1s">
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks for reaching out! We will get back to you shortly.');">
-            <h3 class="form-title">Send us a Message</h3>
-            
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" required placeholder="John Doe" />
-            </div>
+        <div class="contact-form-wrap reveal">
+          <div class="form-card">
+            <h2 class="form-title">Send a Message</h2>
+            <form class="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" placeholder="Pradeep Nagar" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" placeholder="name@example.com" required />
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject">
+                  <option>General Inquiry</option>
+                  <option>Wholesale / Bulk Orders</option>
+                  <option>Gardening Support</option>
+                  <option>Feedback / Suggestions</option>
+                </select>
+              </div>
 
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" required placeholder="john@example.com" />
-            </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" rows="5" placeholder="How can we help you?" required></textarea>
+              </div>
 
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <select id="subject" name="subject">
-                <option value="general">General Inquiry</option>
-                <option value="bulk">Bulk Order</option>
-                <option value="support">Product Support</option>
-                <option value="feedback">Feedback</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required placeholder="How can we help you today?"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn--green btn--full">Send Message</button>
-          </form>
+              <button type="submit" class="btn btn--gold btn--lg btn--full">
+                Send Message
+                <Icon name="arrow-right" width="18" height="18" />
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="section section--cream">
+    <div class="container text-center reveal">
+      <h2 class="section-heading">Frequently Asked Questions</h2>
+      <p class="section-subheading">Maybe we've already answered your question? Check our user guides.</p>
+      <div class="mt-8">
+        <a href="/how-to-use#faq" class="btn btn--outline-dark">Browse FAQs</a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-.page-header {
-  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
-  padding-top: calc(var(--nav-height) + 4rem);
-  padding-bottom: 4rem;
+.page-hero {
+  padding-block: 8rem 4rem;
+  background: linear-gradient(135deg, var(--green-darkest) 0%, var(--green-dark) 100%);
   text-align: center;
 }
 
-.page-title {
-  color: var(--green-darkest);
-  margin-bottom: 1rem;
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--white-warm);
+  line-height: 1.1;
+  margin-block: 1rem 1.5rem;
 }
 
-.page-subtitle {
+.text-gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.7);
   max-width: 600px;
   margin-inline: auto;
-  font-size: 1.125rem;
 }
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  max-width: 1100px;
-  margin-inline: auto;
-}
-
-.mb-4 {
-  margin-bottom: 2rem;
-  color: var(--text-mid);
-}
-
-.contact-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.detail-item {
-  display: flex;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 5rem;
   align-items: flex-start;
+}
+
+.info-group { margin-bottom: 4rem; }
+.info-title { font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem; }
+.info-desc { font-size: 0.9375rem; color: var(--text-mid); margin-bottom: 2rem; }
+
+.contact-methods { list-style: none; display: flex; flex-direction: column; gap: 2rem; }
+.contact-methods li { display: flex; align-items: center; gap: 1.5rem; }
+
+.method-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--green-pale);
+  color: var(--green-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.method-details { display: flex; flex-direction: column; }
+.method-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.25rem; }
+.method-value { font-size: 1.125rem; font-weight: 700; color: var(--green-dark); text-decoration: none; transition: color 0.2s; }
+.method-value:hover { color: var(--green-primary); }
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
-.detail-icon {
-  font-size: 1.5rem;
-  background: var(--green-pale);
-  padding: 0.75rem;
-  border-radius: 50%;
-  line-height: 1;
-}
-
-.detail-content h4 {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  color: var(--green-dark);
-  margin-bottom: 0.25rem;
-}
-
-.detail-content a, .detail-content p {
-  color: var(--text-mid);
-  font-size: 1.0625rem;
-}
-
-.detail-content a:hover {
-  color: var(--gold-dark);
-}
-
-.follow-heading {
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
-  color: var(--green-dark);
-}
-
-.social-pills {
+.social-card {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.social-pill {
-  background: var(--white-warm);
-  border: 1px solid var(--cream-dark);
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--green-primary);
-  transition: all 0.2s ease;
-}
-
-.social-pill:hover {
-  background: var(--green-primary);
-  color: var(--white-warm);
-  border-color: var(--green-primary);
-}
-
-/* Form Styles */
-.contact-form-wrap {
-  background: var(--white-warm);
-  padding: 2.5rem;
+  padding: 1.5rem;
+  background: var(--cream);
   border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  border-top: 4px solid var(--gold);
+  text-decoration: none;
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  transition: all 0.3s ease;
 }
 
-.form-title {
-  font-size: 1.5rem;
-  color: var(--green-darkest);
-  margin-bottom: 1.5rem;
+.social-card:hover { transform: translateY(-5px); background: var(--green-pale); color: var(--green-primary); }
+
+/* Form */
+.form-card {
+  background: var(--white-warm);
+  border-radius: 2rem;
+  padding: 3.5rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  border: 1px solid var(--cream-dark);
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-}
+.form-title { font-size: 2rem; color: var(--green-dark); margin-bottom: 2.5rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-group { margin-bottom: 1.5rem; }
 
 .form-group label {
   display: block;
@@ -223,36 +205,32 @@ import { CONTACT, SOCIAL } from '../lib/constants';
   margin-bottom: 0.5rem;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.form-group input, .form-group select, .form-group textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--cream-dark);
-  border-radius: 0.5rem;
-  font-family: var(--font-sans);
+  font-family: inherit;
   font-size: 1rem;
-  background: var(--cream);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
   outline: none;
-  border-color: var(--green-light);
-  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.2);
+  transition: border-color 0.2s;
 }
 
-.btn--full {
-  width: 100%;
-  justify-content: center;
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--green-primary);
 }
 
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
+.btn--full { width: 100%; justify-content: center; }
+
+.mt-8 { margin-top: 2rem; }
+
+@media (max-width: 1000px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .form-card { padding: 2rem; }
+  .social-grid { grid-template-columns: 1fr; }
 }
 </style>

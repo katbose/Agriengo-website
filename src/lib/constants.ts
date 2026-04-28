@@ -178,9 +178,9 @@ export const FOOTER_LINKS = {
     { label: 'FAQ',           href: '/how-to-use#faq' },
   ],
   legal: [
-    { label: 'Terms & Conditions',    href: '/terms-and-conditions' },
-    { label: 'Privacy Policy',        href: '/privacy-policy' },
-    { label: 'Trademark Notice',      href: '/trademark-notice' },
-    { label: 'Shipping & Returns',    href: '/shipping-returns' },
+    { label: 'Terms & Conditions',    href: '/legal/terms-and-conditions' },
+    { label: 'Privacy Policy',        href: '/legal/privacy-policy' },
+    { label: 'Trademark Notice',      href: '/legal/trademark-notice' },
+    { label: 'Shipping & Returns',    href: '/legal/shipping-returns' },
   ],
 };

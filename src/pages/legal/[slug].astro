@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = [
+    { 
+      slug: 'privacy-policy', 
+      title: 'Privacy Policy',
+      content: 'This Privacy Policy describes how your personal information is collected, used, and shared when you visit AGRIENGO™. We take your data security seriously...'
+    },
+    { 
+      slug: 'terms-and-conditions', 
+      title: 'Terms & Conditions',
+      content: 'Welcome to AGRIENGO™. By using our website, you agree to comply with the following terms and conditions. All content is protected by trademark...'
+    },
+    { 
+      slug: 'trademark-notice', 
+      title: 'Trademark Notice',
+      content: 'AGRIENGO™ and "The Agri Engineer Organic Farms" are registered trademarks (Application No. 7673426). Unauthorized use is strictly prohibited.'
+    },
+    { 
+      slug: 'shipping-returns', 
+      title: 'Shipping & Returns',
+      content: 'We offer pan-India shipping via our marketplace partners. Returns and refunds are handled as per the policies of the respective platforms (Amazon, Flipkart, etc.).'
+    }
+  ];
+
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout 
+  title={page.title} 
+  description={`Legal information regarding ${page.title} for AGRIENGO™.`}
+>
+  <section class="legal-page">
+    <div class="container container--narrow">
+      <h1 class="legal-title">{page.title}</h1>
+      <div class="legal-content prose">
+        <p>{page.content}</p>
+        <p>Last Updated: April 2026</p>
+        
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this {page.title}, please contact us at contact@agriengo.in.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.legal-page { padding-block: 10rem 6rem; }
+.container--narrow { max-width: 800px; }
+
+.legal-title {
+  font-size: 3rem;
+  color: var(--green-dark);
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--cream-dark);
+  padding-bottom: 1rem;
+}
+
+.legal-content :global(h2) { font-size: 1.5rem; color: var(--green-dark); margin-block: 2rem 1rem; }
+.legal-content :global(p) { line-height: 1.8; color: var(--text-mid); margin-bottom: 1.5rem; }
+</style>

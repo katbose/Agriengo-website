@@ -1,202 +1,340 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/global/Icon.astro';
 
-const faqs = [
-  {
-    q: "How often should I use vermicompost?",
-    a: "For potted plants, apply every 3-4 weeks. For garden beds, apply at the beginning of the planting season and then once every 2 months."
-  },
-  {
-    q: "Can I use too much vermicompost?",
-    a: "Unlike chemical fertilizers, vermicompost is natural and will not burn your plants. However, a layer of 1-2 inches is usually sufficient for optimal results."
-  },
-  {
-    q: "Does it smell bad?",
-    a: "No! High-quality vermicompost like AGRIENGO has an earthy, natural smell similar to a forest floor after rain."
-  },
-  {
-    q: "Can I mix it with other fertilizers?",
-    a: "Yes, but it's often not necessary. Vermicompost provides a balanced mix of nutrients. If using other organic fertilizers, you can mix them to create a custom blend."
-  }
-];
+const faqs = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout
-  title="How to Use"
-  description="Learn how to properly apply AGRIENGO™ Premium Vermi Compost for potted plants, garden beds, and agriculture."
+<BaseLayout 
+  title="How to Use" 
+  description="Master the art of organic gardening with our step-by-step guides and dosage calculator for AGRIENGO™ Vermi Compost."
 >
-  <div class="page-header">
+  <section class="page-hero">
     <div class="container">
-      <h1 class="page-title reveal">How to Use AGRIENGO™</h1>
-      <p class="page-subtitle reveal">A simple guide to unlocking the full potential of your organic vermicompost.</p>
-    </div>
-  </div>
-
-  <section class="section">
-    <div class="container">
-      
-      <!-- Application Guide -->
-      <div class="guide-grid">
-        <div class="guide-card reveal">
-          <div class="guide-icon">🪴</div>
-          <h3 class="guide-title">Potted Plants (Indoor & Outdoor)</h3>
-          <ul class="guide-steps">
-            <li><strong>New Potting:</strong> Mix 1 part AGRIENGO with 3 parts potting soil.</li>
-            <li><strong>Existing Plants:</strong> Loosen the top 1 inch of soil. Add a handful of vermicompost around the base of the plant.</li>
-            <li><strong>Watering:</strong> Water lightly immediately after application.</li>
-            <li><strong>Frequency:</strong> Repeat every 3-4 weeks.</li>
-          </ul>
-        </div>
-
-        <div class="guide-card reveal" style="transition-delay: 0.1s">
-          <div class="guide-icon">🏡</div>
-          <h3 class="guide-title">Home Gardens & Flower Beds</h3>
-          <ul class="guide-steps">
-            <li><strong>Preparation:</strong> Spread a 1-2 inch layer over the soil surface.</li>
-            <li><strong>Mixing:</strong> Gently mix it into the top 2-3 inches of the soil using a trowel.</li>
-            <li><strong>Watering:</strong> Water thoroughly to help nutrients reach the roots.</li>
-            <li><strong>Frequency:</strong> Apply at planting and then once every 2 months.</li>
-          </ul>
-        </div>
-
-        <div class="guide-card reveal" style="transition-delay: 0.2s">
-          <div class="guide-icon">🌳</div>
-          <h3 class="guide-title">Trees & Shrubs</h3>
-          <ul class="guide-steps">
-            <li><strong>Application:</strong> Dig a shallow trench around the drip line of the tree.</li>
-            <li><strong>Amount:</strong> Apply 1-2 kg per tree depending on its size.</li>
-            <li><strong>Covering:</strong> Cover the vermicompost with a layer of soil or mulch.</li>
-            <li><strong>Frequency:</strong> Apply twice a year, ideally in spring and autumn.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="divider reveal" style="margin-block: 4rem auto;"></div>
-
-      <!-- FAQ Section -->
-      <div class="faq-section reveal" id="faq">
-        <h2 class="section-heading text-center">Frequently Asked Questions</h2>
-        <div class="faq-list">
-          {faqs.map((faq, i) => (
-            <div class="faq-item">
-              <h4 class="faq-question">{faq.q}</h4>
-              <p class="faq-answer">{faq.a}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <p class="section-label reveal">User Guide</p>
+      <h1 class="hero-title reveal">Feed Your Soil<br/><span class="text-gold">The Right Way</span></h1>
+      <p class="hero-sub reveal">Maximize your harvest by following our agronomist-approved application methods for every type of plant.</p>
     </div>
   </section>
+
+  <!-- ===================== DOSAGE CALCULATOR ===================== -->
+  <section class="section section--cream" id="calculator">
+    <div class="container">
+      <div class="calc-grid">
+        <div class="calc-text reveal">
+          <h2 class="section-heading">Dosage Calculator</h2>
+          <p class="section-subheading">Not sure how much to use? Select your pot size or garden area, and we'll calculate the perfect amount for you.</p>
+          
+          <div class="calc-card">
+            <div class="calc-form">
+              <div class="form-group">
+                <label for="plant-type">What are you growing?</label>
+                <select id="plant-type">
+                  <option value="indoor">Indoor / Ornamental Plants</option>
+                  <option value="vegetables">Vegetables / Kitchen Garden</option>
+                  <option value="fruits">Fruit Trees</option>
+                  <option value="lawn">Lawn / Grass</option>
+                </select>
+              </div>
+              
+              <div class="form-group" id="pot-size-group">
+                <label for="pot-size">Pot Size (Diameter in Inches)</label>
+                <input type="number" id="pot-size" value="12" min="4" max="48" />
+              </div>
+
+              <div class="calc-result" id="calc-result">
+                <span class="result-label">Recommended Dosage:</span>
+                <span class="result-value">250g - 300g</span>
+                <p class="result-note">Apply every 30-45 days.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-visual reveal">
+          <div class="dosage-visual">
+            <div class="dosage-bag">
+              <Icon name="leaf" width="48" height="48" />
+            </div>
+            <div class="dosage-arrow">
+              <Icon name="arrow-right" width="24" height="24" />
+            </div>
+            <div class="dosage-pot">
+              <Icon name="seedling" width="64" height="64" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STEPS ===================== -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-heading text-center reveal">3 Simple Steps to Success</h2>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Loosen the Soil</h3>
+          <p class="step-desc">Gently rake or hoe the top 2-3 inches of soil around the base of the plant, being careful not to damage the roots.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Apply & Mix</h3>
+          <p class="step-desc">Spread the recommended dosage of AGRIENGO™ Vermi Compost evenly and mix it well with the loosened topsoil.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Water Immediately</h3>
+          <p class="step-desc">Water the plant thoroughly after application to activate the microbial life and help nutrients reach the root zone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section section--green" id="faq">
+    <div class="container container--narrow">
+      <h2 class="section-heading section-heading--light text-center reveal">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <div class="faq-item reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <button class="faq-question">
+              <span>{faq.data.question}</span>
+              <Icon name="arrow-right" width="20" height="20" class="faq-icon" />
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer__inner">
+                <p>{faq.body}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Dosage Calculator Logic
+    const potSizeInput = document.getElementById('pot-size') as HTMLInputElement;
+    const plantTypeSelect = document.getElementById('plant-type') as HTMLSelectElement;
+    const resultValue = document.querySelector('.result-value');
+
+    function calculateDosage() {
+      const size = parseInt(potSizeInput.value) || 0;
+      const type = plantTypeSelect.value;
+      let min = 0;
+      let max = 0;
+
+      if (type === 'indoor') {
+        min = Math.round(size * 20);
+        max = Math.round(size * 25);
+      } else {
+        min = Math.round(size * 25);
+        max = Math.round(size * 35);
+      }
+
+      if (resultValue) {
+        resultValue.textContent = `${min}g - ${max}g`;
+      }
+    }
+
+    potSizeInput?.addEventListener('input', calculateDosage);
+    plantTypeSelect?.addEventListener('change', calculateDosage);
+
+    // FAQ Accordion Logic
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item?.classList.contains('active');
+        
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        
+        // Open current if it was closed
+        if (!isOpen && item) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
-.page-header {
-  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
-  padding-top: calc(var(--nav-height) + 4rem);
-  padding-bottom: 4rem;
+.page-hero {
+  padding-block: 8rem 4rem;
+  background: linear-gradient(135deg, var(--green-darkest) 0%, var(--green-dark) 100%);
   text-align: center;
 }
 
-.page-title {
-  color: var(--green-darkest);
-  margin-bottom: 1rem;
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--white-warm);
+  line-height: 1.1;
+  margin-block: 1rem 1.5rem;
 }
 
-.page-subtitle {
+.text-gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.7);
   max-width: 600px;
   margin-inline: auto;
-  font-size: 1.125rem;
 }
 
-.guide-grid {
+.container--narrow { max-width: 800px; }
+
+/* Calculator */
+.calc-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1100px;
-  margin-inline: auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
 }
 
-.guide-card {
+.calc-card {
   background: var(--white-warm);
-  padding: 2.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  border-top: 4px solid var(--green-primary);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  margin-top: 2rem;
+  border: 1px solid var(--cream-dark);
 }
 
-.guide-icon {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
+.form-group { margin-bottom: 1.5rem; }
 
-.guide-title {
-  font-size: 1.25rem;
-  color: var(--green-dark);
-  margin-bottom: 1.5rem;
-}
-
-.guide-steps {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.guide-steps li {
-  font-size: 0.9375rem;
-  color: var(--text-mid);
-  line-height: 1.5;
-  padding-left: 1.5rem;
-  position: relative;
-}
-
-.guide-steps li::before {
-  content: "•";
-  color: var(--gold);
-  position: absolute;
-  left: 0;
-  font-size: 1.5rem;
-  line-height: 1;
-  top: -2px;
-}
-
-.guide-steps strong {
-  color: var(--text-dark);
-}
-
-.text-center {
-  text-align: center;
-}
-
-.faq-section {
-  max-width: 800px;
-  margin-inline: auto;
-}
-
-.faq-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
-
-.faq-item {
-  background: var(--white-warm);
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  border-left: 3px solid var(--gold);
-}
-
-.faq-question {
-  font-family: var(--font-sans);
-  font-size: 1.125rem;
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
   color: var(--green-dark);
   margin-bottom: 0.5rem;
 }
 
+.form-group select, .form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--cream-dark);
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+}
+
+.form-group select:focus, .form-group input:focus {
+  border-color: var(--green-primary);
+}
+
+.calc-result {
+  background: var(--green-pale);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.result-label { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; color: var(--green-dark); display: block; }
+.result-value { font-size: 2rem; font-family: var(--font-serif); font-weight: 700; color: var(--green-primary); margin-block: 0.25rem; display: block; }
+.result-note { font-size: 0.8125rem; color: var(--text-mid); }
+
+.dosage-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.dosage-bag, .dosage-pot {
+  width: 120px;
+  height: 120px;
+  background: var(--white-warm);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.dosage-arrow { color: var(--green-light); animation: pulse 2s infinite; }
+
+@keyframes pulse {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(10px); opacity: 1; }
+}
+
+/* Steps */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.step-card {
+  text-align: center;
+  padding: 2rem;
+}
+
+.step-num {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--green-pale);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.step-title { font-size: 1.25rem; color: var(--green-dark); margin-bottom: 1rem; }
+.step-desc { font-size: 0.9375rem; color: var(--text-mid); line-height: 1.6; }
+
+/* FAQ */
+.faq-list { margin-top: 3rem; }
+
+.faq-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item.active { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--white-warm);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-icon { transition: transform 0.3s ease; }
+.faq-item.active .faq-icon { transform: rotate(90deg); color: var(--gold); }
+
 .faq-answer {
-  font-size: 0.9375rem;
-  color: var(--text-mid);
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-item.active .faq-answer { max-height: 500px; }
+
+.faq-answer__inner { padding: 0 1.5rem 1.5rem; }
+.faq-answer p { font-size: 0.9375rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .calc-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .calc-visual { display: none; }
+  .steps-grid { grid-template-columns: 1fr; }
 }
 </style>

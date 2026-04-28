@@ -1,53 +1,60 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/global/Icon.astro';
 
 const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
 ---
 
-<BaseLayout
-  title="Blog"
-  description="Expert advice on organic farming, gardening tips, and the science behind vermicompost."
+<BaseLayout 
+  title="Gardening Blog" 
+  description="Expert gardening tips, soil science, and organic farming guides from AGRIENGO™ agronomists."
 >
-  <div class="page-header">
+  <section class="blog-hero">
     <div class="container">
-      <h1 class="page-title reveal">Knowledge Hub</h1>
-      <p class="page-subtitle reveal">Tips, guides, and expert advice for organic gardening.</p>
+      <p class="section-label reveal">Our Journal</p>
+      <h1 class="hero-title reveal">Grow Smarter with<br/><span class="text-gold">Expert Insights</span></h1>
+      <p class="hero-sub reveal">Dive into the science of soil health and discover the best practices for a thriving organic garden.</p>
     </div>
-  </div>
+  </section>
 
   <section class="section">
     <div class="container">
       <div class="blog-grid">
-        {posts.map((post, index) => (
-          <a href={`/blog/${post.slug}`} class="blog-card reveal" style={`transition-delay: ${index * 0.1}s`}>
-            <div class="blog-image-wrap">
-              <!-- Placeholder for blog images -->
-              <div class="blog-placeholder-image">
-                 <span class="blog-icon">🌿</span>
+        {posts.map((post) => (
+          <article class="blog-card reveal">
+            <a href={`/blog/${post.id}`} class="blog-card__link">
+              <div class="blog-card__image">
+                <img src={post.data.heroImage || '/images/blog/placeholder.jpg'} alt={post.data.title} />
+                <div class="blog-card__category">{post.data.tags[0]}</div>
               </div>
-            </div>
-            <div class="blog-content">
-              <div class="blog-meta">
-                <span class="blog-date">
-                  {post.data.pubDate.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
+              <div class="blog-card__content">
+                <div class="blog-card__meta">
+                  <span class="blog-card__date">
+                    <Icon name="clock" width="14" height="14" />
+                    {formatDate(post.data.pubDate)}
+                  </span>
+                  <span class="blog-card__author">By {post.data.author}</span>
+                </div>
+                <h2 class="blog-card__title">{post.data.title}</h2>
+                <p class="blog-card__excerpt">{post.data.description}</p>
+                <span class="blog-card__read-more">
+                  Read Article
+                  <Icon name="arrow-right" width="16" height="16" />
                 </span>
               </div>
-              <h3 class="blog-title">{post.data.title}</h3>
-              <p class="blog-desc">{post.data.description}</p>
-              <div class="blog-tags">
-                {post.data.tags.slice(0, 2).map(tag => (
-                  <span class="blog-tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </a>
+            </a>
+          </article>
         ))}
       </div>
     </div>
@@ -55,111 +62,121 @@ const posts = (await getCollection('blog')).sort(
 </BaseLayout>
 
 <style>
-.page-header {
-  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
-  padding-top: calc(var(--nav-height) + 4rem);
-  padding-bottom: 4rem;
+.blog-hero {
+  padding-block: 8rem 4rem;
+  background: linear-gradient(135deg, var(--green-darkest) 0%, var(--green-dark) 100%);
   text-align: center;
 }
 
-.page-title {
-  color: var(--green-darkest);
-  margin-bottom: 1rem;
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--white-warm);
+  line-height: 1.1;
+  margin-block: 1rem 1.5rem;
 }
 
-.page-subtitle {
+.text-gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.7);
   max-width: 600px;
   margin-inline: auto;
-  font-size: 1.125rem;
 }
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 2.5rem;
 }
 
 .blog-card {
-  display: flex;
-  flex-direction: column;
   background: var(--white-warm);
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  border: 1px solid rgba(0,0,0,0.05);
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
-  text-decoration: none;
+  border: 1px solid var(--cream-dark);
+  transition: all 0.3s var(--ease-out);
 }
 
 .blog-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: var(--green-light);
 }
 
-.blog-image-wrap {
-  aspect-ratio: 16/9;
-  background: var(--green-pale);
+.blog-card__link { text-decoration: none; color: inherit; }
+
+.blog-card__image {
   position: relative;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
 }
 
-.blog-placeholder-image {
+.blog-card__image img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card__image img { transform: scale(1.05); }
+
+.blog-card__category {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--green-dark);
+  color: var(--white-warm);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.blog-card__content { padding: 1.75rem; }
+
+.blog-card__meta {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--green-pale), var(--cream-dark));
-}
-
-.blog-icon {
-  font-size: 4rem;
-  opacity: 0.5;
-}
-
-.blog-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.blog-meta {
+  margin-bottom: 1rem;
   font-size: 0.8125rem;
   color: var(--text-light);
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 700;
 }
 
-.blog-title {
-  font-size: 1.25rem;
-  color: var(--green-darkest);
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
+.blog-card__date { display: flex; align-items: center; gap: 0.4rem; }
+
+.blog-card__title {
+  font-size: 1.5rem;
+  color: var(--green-dark);
+  margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
-.blog-desc {
+.blog-card__excerpt {
   font-size: 0.9375rem;
   color: var(--text-mid);
-  margin-bottom: 1.5rem;
   line-height: 1.6;
-  flex: 1;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.blog-tags {
-  display: flex;
+.blog-card__read-more {
+  display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  font-weight: 700;
+  color: var(--green-primary);
+  font-size: 0.9375rem;
 }
 
-.blog-tag {
-  font-size: 0.75rem;
-  background: var(--cream);
-  color: var(--green-dark);
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-weight: 600;
+@media (max-width: 600px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-hero { padding-block: 6rem 3rem; }
 }
 </style>

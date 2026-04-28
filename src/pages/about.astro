@@ -1,236 +1,373 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { BRAND } from '../lib/constants';
+import Icon from '../components/global/Icon.astro';
 ---
 
-<BaseLayout
-  title="About Us"
-  description="Learn about the mission and story behind AGRIENGO™ — The Agri Engineer Organic Farms."
+<BaseLayout 
+  title="Our Story" 
+  description="Learn about AGRIENGO™ — The Agri Engineer Organic Farms. Our mission to restore soil health and empower gardeners across India."
 >
-  <div class="page-header">
+  <section class="page-hero">
     <div class="container">
-      <h1 class="page-title reveal">Our Story</h1>
-      <p class="page-subtitle reveal">Building healthier soil for a sustainable future.</p>
+      <div class="hero-content-wrap">
+        <p class="section-label reveal">Our Mission</p>
+        <h1 class="hero-title reveal">The Agri Engineer<br/><span class="text-gold">Organic Farms</span></h1>
+        <p class="hero-sub reveal">Founded by agronomists with a single mission: to bring professional-grade soil engineering to the home gardener.</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <section class="section">
+  <section class="section section--story">
     <div class="container">
-      
-      <div class="about-grid">
-        <div class="about-content reveal">
-          <h2 class="section-heading">The Agri Engineer Organic Farms</h2>
-          <p class="lead-text">
-            AGRIENGO™ was founded on a simple principle: healthy food starts with healthy soil.
-          </p>
-          <div class="about-text-body">
-            <p>
-              In a world increasingly reliant on chemical fertilizers that deplete our land over time, we recognized the urgent need to return to nature's original method of soil enrichment.
-            </p>
-            <p>
-              Through careful research and natural processes, we've perfected the art of vermicomposting. Our Grade-A NPK enriched vermicompost is produced in controlled environments to ensure the highest quality, consistency, and nutrient density.
-            </p>
-            <p>
-              Whether you're nurturing a small balcony garden or managing agricultural land, our mission is to provide you with the finest organic inputs that promote vigorous plant growth while restoring the earth's natural balance.
-            </p>
-          </div>
-          
-          <div class="mission-box mt-4">
-            <h3>Our Mission</h3>
-            <p>To make premium organic farming inputs accessible to everyone, empowering individuals to grow healthier plants and contribute to a greener planet.</p>
+      <div class="story-grid">
+        <div class="story-image reveal">
+          <div class="story-image__placeholder">
+            <Icon name="seedling" width="120" height="120" />
+            <div class="est-badge">Est. 2024</div>
           </div>
         </div>
-
-        <div class="about-image-col reveal" style="transition-delay: 0.2s">
-          <div class="image-stack">
-            <div class="img-frame img-frame-1">
-               <img src="/images/products/adriengo_vermiCompost_1kg.png" alt="AGRIENGO Vermicompost" class="img-fluid" />
+        <div class="story-content reveal">
+          <h2 class="section-heading">Born from Science.</h2>
+          <p class="section-subheading">At AGRIENGO™, we believe that the secret to a thriving garden isn't just seeds or water — it's the biology of the soil itself.</p>
+          
+          <div class="story-text">
+            <p>Our journey began in the research labs of professional agriculture, where we saw the devastating effects of chemical fertilisers on long-term soil fertility. We decided to bridge the gap between high-tech agronomy and organic traditionalism by engineering a product that delivers both immediate results and long-term soil health.</p>
+            <p>Today, AGRIENGO™ (Trademark Application No. 7673426) stands as a commitment to quality. Every bag of our premium vermicompost is meticulously processed to ensure a perfect balance of Nitrogen, Phosphorus, and Potassium, enriched with billions of beneficial microorganisms.</p>
+          </div>
+          
+          <div class="values-list">
+            <div class="value-item">
+              <div class="value-icon">
+                <Icon name="shield" width="22" height="22" />
+              </div>
+              <div class="value-text">
+                <strong>Quality Guaranteed</strong>
+                <span>Rigorous lab-testing for every batch.</span>
+              </div>
             </div>
-            <div class="badge-overlay">
-              <div class="cert-badge">
-                <span class="cert-icon">🌿</span>
-                <span class="cert-text">100% Organic</span>
+            <div class="value-item">
+              <div class="value-icon">
+                <Icon name="leaf" width="22" height="22" />
+              </div>
+              <div class="value-text">
+                <strong>100% Organic</strong>
+                <span>Pure castings, zero chemical additives.</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <section class="section section--alt">
-    <div class="container text-center">
-      <h2 class="section-heading reveal">Our Core Values</h2>
-      <div class="values-grid">
-        <div class="value-card reveal">
-          <div class="value-icon">🌍</div>
-          <h4>Sustainability</h4>
-          <p>We believe in farming practices that give back to the earth rather than taking from it.</p>
+  <section class="section section--stats section--cream">
+    <div class="container">
+      <div class="stats-row reveal">
+        <div class="stat-unit">
+          <span class="stat-number">10k+</span>
+          <span class="stat-desc">Gardens Transformed</span>
         </div>
-        <div class="value-card reveal" style="transition-delay: 0.1s">
-          <div class="value-icon">🔬</div>
-          <h4>Quality</h4>
-          <p>Every batch of our compost undergoes rigorous testing to ensure Grade-A NPK levels.</p>
+        <div class="stat-divider"></div>
+        <div class="stat-unit">
+          <span class="stat-number">100%</span>
+          <span class="stat-desc">Organic Certified</span>
         </div>
-        <div class="value-card reveal" style="transition-delay: 0.2s">
-          <div class="value-icon">🤝</div>
-          <h4>Community</h4>
-          <p>Supporting local farmers and home gardeners in their organic journey.</p>
+        <div class="stat-divider hide-mobile"></div>
+        <div class="stat-unit">
+          <span class="stat-number">Grade-A</span>
+          <span class="stat-desc">NPK Enrichment</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-unit">
+          <span class="stat-number">24/7</span>
+          <span class="stat-desc">Agronomist Support</span>
         </div>
       </div>
     </div>
   </section>
 
+  <section class="section section--support">
+    <div class="container text-center reveal">
+      <h2 class="section-heading">The Consumer Wellness Cell</h2>
+      <p class="section-subheading mx-auto">Your plant's health is our priority. We are here to guide you at every step of your organic gardening journey.</p>
+      
+      <div class="support-strip-container">
+        <div class="support-strip">
+          <div class="support-unit">
+            <div class="support-icon-sm">
+              <Icon name="clock" width="18" height="18" />
+            </div>
+            <div class="support-info">
+              <h3>Support Hours</h3>
+              <p>Mon - Sat: 9-7 PM</p>
+            </div>
+          </div>
+          <div class="support-unit">
+            <div class="support-icon-sm">
+              <Icon name="external-link" width="18" height="18" />
+            </div>
+            <div class="support-info">
+              <h3>Email Support</h3>
+              <p>contact@agriengo.in</p>
+            </div>
+          </div>
+          <div class="support-unit">
+            <div class="support-icon-sm">
+              <Icon name="arrow-right" width="18" height="18" />
+            </div>
+            <div class="support-info">
+              <h3>Direct Line</h3>
+              <p>+91 7753827648</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-.page-header {
-  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
-  padding-top: calc(var(--nav-height) + 4rem);
-  padding-bottom: 4rem;
+/* Page Hero */
+.page-hero {
+  padding-block: 10rem 6rem;
+  background: linear-gradient(135deg, var(--green-darkest) 0%, var(--green-dark) 100%);
   text-align: center;
+  position: relative;
 }
 
-.page-title {
-  color: var(--green-darkest);
-  margin-bottom: 1rem;
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--white-warm);
+  line-height: 1.1;
+  margin-block: 1.5rem 2rem;
 }
 
-.page-subtitle {
-  max-width: 600px;
+.text-gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.7);
+  max-width: 650px;
   margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* Story Section */
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.story-image__placeholder {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--green-pale);
+  border-radius: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-primary);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.03);
+}
+
+.est-badge {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--white-warm);
+  color: var(--green-dark);
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.story-text { margin-block: 2.5rem; }
+.story-text p { 
+  color: var(--text-mid); 
+  line-height: 1.8; 
+  margin-bottom: 1.5rem; 
   font-size: 1.125rem;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.lead-text {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--green-primary);
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-}
-
-.about-text-body p {
-  margin-bottom: 1.25rem;
-  font-size: 1.0625rem;
-}
-
-.mission-box {
-  background: var(--green-pale);
-  padding: 2rem;
-  border-radius: 1rem;
-  border-left: 4px solid var(--green-primary);
-}
-
-.mission-box h3 {
-  color: var(--green-dark);
-  margin-bottom: 0.5rem;
-  font-family: var(--font-sans);
-}
-
-.mission-box p {
-  color: var(--green-darkest);
-  margin: 0;
-}
-
-.mt-4 {
-  margin-top: 2rem;
-}
-
-.image-stack {
-  position: relative;
-  padding: 2rem;
-}
-
-.img-frame {
-  background: var(--white-warm);
-  padding: 1rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-  position: relative;
-  z-index: 1;
-}
-
-.img-fluid {
-  width: 100%;
-  height: auto;
-  display: block;
-  transform: scale(1.15);
-  transform-origin: center;
-}
-
-.badge-overlay {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 2;
-  transform: translate(-10%, 20%);
-}
-
-.cert-badge {
-  background: var(--gold);
-  color: var(--green-darkest);
-  padding: 1rem 1.5rem;
-  border-radius: 999px;
+.values-list { 
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  box-shadow: 0 8px 24px rgba(212,168,67,0.4);
-}
-
-.cert-icon {
-  font-size: 1.5rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 3rem;
   margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--cream-dark);
 }
 
-.value-card {
-  background: var(--white-warm);
-  padding: 2.5rem 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  border-top: 3px solid var(--gold);
-}
+.value-item { display: flex; align-items: flex-start; gap: 1.25rem; }
 
 .value-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  width: 48px;
+  height: 48px;
+  background: var(--green-pale);
+  color: var(--green-primary);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.value-card h4 {
+.value-text { display: flex; flex-direction: column; gap: 0.35rem; }
+.value-text strong { color: var(--green-dark); font-size: 1.125rem; }
+.value-text span { color: var(--text-light); font-size: 0.875rem; line-height: 1.4; }
+
+/* Stats Row */
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 2rem;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.stat-unit {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-number {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
   color: var(--green-dark);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-desc { 
+  font-size: 0.75rem; 
+  color: var(--text-light); 
+  font-weight: 700; 
+  text-transform: uppercase; 
+  letter-spacing: 0.12em; 
+}
+
+.stat-divider {
+  width: 1px;
+  height: 50px;
+  background: var(--cream-dark);
+  flex-shrink: 0;
+}
+
+/* Support Strip */
+.support-strip-container {
+  margin-top: 4rem;
+  border-top: 1px solid var(--cream-dark);
+  border-bottom: 1px solid var(--cream-dark);
+  padding-block: 2rem;
+}
+
+.support-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.support-unit {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.support-icon-sm {
+  width: 36px;
+  height: 36px;
+  background: var(--green-pale);
+  color: var(--green-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.support-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.support-info h3 { 
+  font-size: 0.75rem; 
+  text-transform: uppercase; 
+  letter-spacing: 0.12em; 
+  color: var(--text-light); 
+  margin-bottom: 0.25rem;
+}
+
+.support-info p { 
+  font-size: 0.9375rem; 
+  color: var(--green-dark); 
+  font-weight: 700;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .story-grid { gap: 4rem; }
+  .support-strip { gap: 2rem; }
 }
 
 @media (max-width: 900px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-  .values-grid {
-    grid-template-columns: 1fr;
-  }
-  .badge-overlay {
-    transform: translate(0, 0);
-    bottom: -1rem;
-    right: 1rem;
-  }
+  .story-grid { grid-template-columns: 1fr; text-align: center; }
+  .story-image__placeholder { max-width: 400px; margin-inline: auto; }
+  .story-text p { text-align: center; }
+  .values-list { justify-content: center; gap: 2rem; }
+  .stats-row { flex-wrap: wrap; gap: 3rem 0; justify-content: center; }
+  .stat-unit { flex: 0 0 50%; }
+  .stat-divider.hide-mobile { display: none; }
 }
+
+@media (max-width: 768px) {
+  .support-strip { 
+    gap: 1.5rem;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-inline: 1rem;
+    scrollbar-width: none; /* Firefox */
+  }
+  .support-strip::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+  .support-unit { min-width: max-content; }
+}
+
+@media (max-width: 600px) {
+  .page-hero { padding-block: 8rem 4rem; }
+  .values-list { flex-direction: column; align-items: center; gap: 1.5rem; }
+  .value-item { width: 100%; max-width: 280px; text-align: left; }
+  .stat-unit { flex: 0 0 100%; }
+  .stat-divider { display: none; }
+  
+  /* Support Horizontal Force */
+  .support-strip {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .support-info h3 { font-size: 0.625rem; }
+  .support-info p { font-size: 0.7rem; }
+  .support-icon-sm { width: 28px; height: 28px; }
+  .support-icon-sm :global(svg) { width: 14px; height: 14px; }
+}
+
+@media (max-width: 380px) {
+  .support-info h3 { display: none; } /* Hide labels on tiny screens to save space */
+  .support-strip { gap: 1rem; justify-content: center; }
+}
+
+.mx-auto { margin-inline: auto; }
 </style>

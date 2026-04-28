@@ -1,191 +1,151 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/global/Icon.astro';
 import { MARKETPLACES } from '../lib/constants';
+
+const ecommerce = MARKETPLACES.filter(m => m.type === 'ecommerce');
+const quickCommerce = MARKETPLACES.filter(m => m.type === 'quick');
 ---
 
-<BaseLayout
-  title="Where to Buy"
-  description="Buy AGRIENGO™ Premium Vermi Compost on Amazon, Flipkart, Blinkit, Zepto, BigBasket, and Swiggy Instamart."
+<BaseLayout 
+  title="Where to Buy" 
+  description="Order AGRIENGO™ Premium Vermi Compost from India's leading marketplaces including Amazon, Flipkart, Blinkit, and more."
 >
-  <div class="page-header">
+  <section class="page-hero">
     <div class="container">
-      <h1 class="page-title reveal">Where to Buy</h1>
-      <p class="page-subtitle reveal">Order online for fast delivery directly to your doorstep. Choose your preferred platform below.</p>
+      <p class="section-label reveal">Marketplace Hub</p>
+      <h1 class="hero-title reveal">Get It Delivered<br/><span class="text-gold">To Your Door</span></h1>
+      <p class="hero-sub reveal">AGRIENGO™ is available across all major e-commerce and quick-commerce platforms for your convenience.</p>
     </div>
-  </div>
+  </section>
 
   <section class="section">
     <div class="container">
-      
-      <!-- Ecommerce -->
-      <div class="marketplace-group reveal">
-        <h2 class="marketplace-category">E-Commerce Platforms</h2>
-        <div class="marketplace-grid">
-          {MARKETPLACES.filter(m => m.type === 'ecommerce').map(platform => (
-            <a href={platform.url} target="_blank" rel="noopener noreferrer" class="marketplace-card">
-              <div class="marketplace-icon">{platform.icon}</div>
-              <div class="marketplace-info">
-                <h3 class="marketplace-name">{platform.name}</h3>
-                <p class="marketplace-desc">{platform.description}</p>
+      <div class="market-section">
+        <h2 class="section-heading reveal">E-Commerce Platforms</h2>
+        <p class="section-subheading reveal">Best for bulk orders (5KG) and scheduled deliveries across India.</p>
+        
+        <div class="market-grid">
+          {ecommerce.map(m => (
+            <div class="market-card reveal">
+              <div class="market-card__icon">
+                <Icon name={m.icon} width="32" height="32" />
               </div>
-              <div class="marketplace-action">
-                <span class="btn btn--gold btn--sm">Buy Now</span>
+              <div class="market-card__content">
+                <h3>{m.name}</h3>
+                <p>{m.description}</p>
+                <a href={m.url} target="_blank" rel="noopener" class="btn btn--gold btn--sm">Shop on {m.name}</a>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
 
-      <div class="divider reveal" style="margin-block: 4rem auto;"></div>
-
-      <!-- Quick Commerce -->
-      <div class="marketplace-group reveal">
-        <h2 class="marketplace-category">Quick Commerce (10-Minute Delivery)</h2>
-        <div class="marketplace-grid">
-          {MARKETPLACES.filter(m => m.type === 'quick').map(platform => (
-            <a href={platform.url} target="_blank" rel="noopener noreferrer" class="marketplace-card">
-              <div class="marketplace-icon">{platform.icon}</div>
-              <div class="marketplace-info">
-                <h3 class="marketplace-name">{platform.name}</h3>
-                <p class="marketplace-desc">{platform.description}</p>
+      <div class="market-section">
+        <h2 class="section-heading reveal">Quick-Commerce (10-Min Delivery)</h2>
+        <p class="section-subheading reveal">Perfect for when you need to repot that plant right now. Available in select cities.</p>
+        
+        <div class="market-grid">
+          {quickCommerce.map(m => (
+            <div class="market-card reveal">
+              <div class="market-card__icon text-lightning">
+                <Icon name={m.icon} width="32" height="32" />
               </div>
-              <div class="marketplace-action">
-                <span class="btn btn--gold btn--sm">Buy Now</span>
+              <div class="market-card__content">
+                <h3>{m.name}</h3>
+                <p>{m.description}</p>
+                <a href={m.url} target="_blank" rel="noopener" class="btn btn--green btn--sm">Order on {m.name}</a>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Direct Contact CTA -->
-      <div class="bulk-order-cta reveal">
-        <h3>Need Bulk Orders?</h3>
-        <p>For farm orders or quantities above 50kg, please contact our consumer cell.</p>
-        <a href="/contact" class="btn btn--green">Contact Us</a>
+  <section class="section section--green">
+    <div class="container text-center reveal">
+      <h2 class="section-heading section-heading--light">Wholesale & Bulk Inquiries</h2>
+      <p class="section-subheading section-heading--light">Are you a nursery, landscaper, or organic farm? Contact us directly for institutional pricing.</p>
+      <div class="mt-8">
+        <a href="/contact" class="btn btn--gold btn--lg">Contact Sales Team</a>
       </div>
-
     </div>
   </section>
 </BaseLayout>
 
 <style>
-.page-header {
-  background: linear-gradient(to bottom, var(--green-pale), var(--cream));
-  padding-top: calc(var(--nav-height) + 4rem);
-  padding-bottom: 4rem;
+.page-hero {
+  padding-block: 8rem 4rem;
+  background: linear-gradient(135deg, var(--green-darkest) 0%, var(--green-dark) 100%);
   text-align: center;
 }
 
-.page-title {
-  color: var(--green-darkest);
-  margin-bottom: 1rem;
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--white-warm);
+  line-height: 1.1;
+  margin-block: 1rem 1.5rem;
 }
 
-.page-subtitle {
+.text-gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.7);
   max-width: 600px;
   margin-inline: auto;
-  font-size: 1.125rem;
 }
 
-.marketplace-group {
-  margin-bottom: 3rem;
-}
+.market-section { margin-bottom: 5rem; }
 
-.marketplace-category {
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--green-primary);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.marketplace-grid {
+.market-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin-inline: auto;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
-.marketplace-card {
+.market-card {
+  background: var(--white-warm);
+  border: 1px solid var(--cream-dark);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s var(--ease-out);
+}
+
+.market-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+  border-color: var(--green-light);
+}
+
+.market-card__icon {
+  width: 64px;
+  height: 64px;
+  background: var(--cream);
+  color: var(--green-primary);
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  background: var(--white-warm);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  text-decoration: none;
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
-}
-
-.marketplace-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-  border-color: var(--gold);
-}
-
-.marketplace-icon {
-  font-size: 2.5rem;
-  line-height: 1;
-  background: var(--green-pale);
-  padding: 1rem;
-  border-radius: 0.75rem;
-}
-
-.marketplace-info {
-  flex: 1;
-}
-
-.marketplace-name {
-  font-size: 1.125rem;
-  color: var(--text-dark);
-  margin-bottom: 0.25rem;
-}
-
-.marketplace-desc {
-  font-size: 0.875rem;
-  color: var(--text-light);
-  line-height: 1.4;
-}
-
-.marketplace-action {
-  flex-shrink: 0;
-}
-
-.bulk-order-cta {
-  background: var(--white-warm);
-  padding: 3rem;
-  border-radius: 1rem;
-  text-align: center;
-  max-width: 600px;
-  margin: 4rem auto 0;
-  border: 1px dashed var(--green-light);
-}
-
-.bulk-order-cta h3 {
-  font-size: 1.5rem;
-  color: var(--green-dark);
-  margin-bottom: 0.5rem;
-}
-
-.bulk-order-cta p {
+  justify-content: center;
   margin-bottom: 1.5rem;
 }
 
-@media (max-width: 640px) {
-  .marketplace-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .marketplace-action {
-    width: 100%;
-  }
-  .marketplace-action .btn {
-    width: 100%;
-    justify-content: center;
-  }
+.text-lightning { color: #FFA500; background: #FFF8E1; }
+
+.market-card h3 { font-size: 1.5rem; color: var(--green-dark); margin-bottom: 0.5rem; }
+.market-card p { font-size: 0.9375rem; color: var(--text-mid); margin-bottom: 2rem; }
+
+.market-card .btn { width: 100%; justify-content: center; }
+
+.mt-8 { margin-top: 2rem; }
+
+@media (max-width: 600px) {
+  .market-grid { grid-template-columns: 1fr; }
 }
 </style>
