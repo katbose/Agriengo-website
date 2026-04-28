@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
+import { PRODUCTS, TRUST_BADGES, MARKETPLACES } from '../lib/constants';
+import Icon from '../components/global/Icon.astro';
 ---
 
 <BaseLayout
@@ -12,7 +13,10 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
     <div class="hero-bg"></div>
     <div class="hero-content container">
       <div class="hero-text">
-        <span class="hero-eyebrow">🌿 100% Organic · Lab Tested · Grade-A NPK</span>
+        <span class="hero-eyebrow">
+          <Icon name="leaf" width="14" height="14" class="inline-block mr-1" />
+          100% Organic · Lab Tested · Grade-A NPK
+        </span>
         <h1 class="hero-headline">
           Feed Your Soil.<br />
           <span class="hero-headline--gold">Feed the Planet.</span>
@@ -23,13 +27,16 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
         <div class="hero-actions">
           <a href="/where-to-buy" class="btn btn--gold btn--lg" id="hero-shop-cta">
             Shop Now
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <Icon name="arrow-right" width="18" height="18" />
           </a>
           <a href="/how-to-use" class="btn btn--outline btn--lg" id="hero-learn-cta">Learn How to Use</a>
         </div>
         <div class="hero-badges">
           {TRUST_BADGES.map(b => (
-            <span class="hero-badge"><span>{b.icon}</span>{b.label}</span>
+            <span class="hero-badge">
+              <Icon name={b.icon} width="16" height="16" />
+              {b.label}
+            </span>
           ))}
         </div>
       </div>
@@ -83,7 +90,10 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
                 height="260"
                 loading="lazy"
               />
-              <span class="product-tag-badge">{p.tagIcon} {p.tag}</span>
+              <span class="product-tag-badge">
+                <Icon name={p.tagIcon} width="14" height="14" />
+                {p.tag}
+              </span>
             </div>
             <div class="product-body">
               <h3 class="product-name">AGRIENGO™ Premium<br/>Vermi Compost</h3>
@@ -91,7 +101,10 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
               <p class="product-desc">{p.description}</p>
               <ul class="product-benefits">
                 {p.benefits.slice(0,3).map(b => (
-                  <li><span class="benefit-dot">✓</span>{b}</li>
+                  <li>
+                    <Icon name="check" width="14" height="14" class="benefit-dot" />
+                    {b}
+                  </li>
                 ))}
               </ul>
               <a href="/where-to-buy" class={`btn ${p.tag === 'Most Popular' ? 'btn--gold' : 'btn--green'} btn--sm product-buy-btn`}>
@@ -114,15 +127,17 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
       <h2 class="section-heading section-heading--light reveal">Science-Backed. Nature-Made.</h2>
       <div class="benefits-grid">
         {[
-          { icon: '🌱', title: 'Enriches Soil Structure', desc: 'Improves aeration, drainage and water retention for healthier root zones.' },
-          { icon: '🌾', title: 'Promotes Seed Germination', desc: 'Enzyme-rich castings accelerate sprouting and early plant development.' },
-          { icon: '🪱', title: 'Boosts Microbial Activity', desc: 'Introduces billions of beneficial microorganisms into your soil ecosystem.' },
-          { icon: '🧪', title: 'Lab Tested Quality', desc: 'Every batch is scientifically tested and certified Grade-A NPK enriched.' },
-          { icon: '🔬', title: 'Enhances Root Health', desc: 'Humic acids and growth hormones encourage deep, strong root systems.' },
-          { icon: '🍃', title: 'Rich in Nutrients', desc: 'Natural nitrogen, phosphorus, potassium and 50+ micro-nutrients.' },
+          { icon: 'seedling', title: 'Enriches Soil Structure', desc: 'Improves aeration, drainage and water retention for healthier root zones.' },
+          { icon: 'leaf', title: 'Promotes Seed Germination', desc: 'Enzyme-rich castings accelerate sprouting and early plant development.' },
+          { icon: 'beaker', title: 'Boosts Microbial Activity', desc: 'Introduces billions of beneficial microorganisms into your soil ecosystem.' },
+          { icon: 'shield', title: 'Lab Tested Quality', desc: 'Every batch is scientifically tested and certified Grade-A NPK enriched.' },
+          { icon: 'microscope', title: 'Enhances Root Health', desc: 'Humic acids and growth hormones encourage deep, strong root systems.' },
+          { icon: 'leaf', title: 'Rich in Nutrients', desc: 'Natural nitrogen, phosphorus, potassium and 50+ micro-nutrients.' },
         ].map((item, i) => (
           <div class="benefit-card reveal" style={`transition-delay: ${i * 0.08}s`}>
-            <div class="benefit-icon">{item.icon}</div>
+            <div class="benefit-icon">
+              <Icon name={item.icon} width="32" height="32" />
+            </div>
             <h4 class="benefit-title">{item.title}</h4>
             <p class="benefit-desc">{item.desc}</p>
           </div>
@@ -131,7 +146,73 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
     </div>
   </section>
 
-  <!-- ===================== CTA BANNER ===================== -->
+  <!-- ===================== LAB RESULTS (NPK) ===================== -->
+  <section class="section" id="lab-results">
+    <div class="container">
+      <div class="lab-grid">
+        <div class="lab-content reveal">
+          <p class="section-label">Grade-A Quality</p>
+          <h2 class="section-heading">Scientifically Analyzed. Lab Certified.</h2>
+          <p class="section-subheading">Every batch of AGRIENGO™ vermicompost undergoes rigorous testing to ensure maximum nutrient density and zero pathogens.</p>
+          
+          <ul class="lab-stats">
+            <li>
+              <span class="stat-value">25-30%</span>
+              <span class="stat-label">Moisture Content</span>
+            </li>
+            <li>
+              <span class="stat-value">1.5 - 2.5%</span>
+              <span class="stat-label">Total Nitrogen (N)</span>
+            </li>
+            <li>
+              <span class="stat-value">1.0 - 1.5%</span>
+              <span class="stat-label">Phosphorus (P)</span>
+            </li>
+            <li>
+              <span class="stat-value">1.5 - 2.0%</span>
+              <span class="stat-label">Potassium (K)</span>
+            </li>
+          </ul>
+          
+          <div class="lab-cta">
+            <a href="/how-to-use#lab-report" class="btn btn--outline-dark">
+              View Full Lab Report
+              <Icon name="external-link" width="16" height="16" />
+            </a>
+          </div>
+        </div>
+        
+        <div class="lab-visual reveal">
+          <div class="npk-chart">
+            <div class="npk-circle">
+              <span class="npk-title">Grade-A</span>
+              <span class="npk-subtitle">Enriched</span>
+            </div>
+            <div class="npk-label npk-label--n"><span>N</span>Nitrogen</div>
+            <div class="npk-label npk-label--p"><span>P</span>Phosphorus</div>
+            <div class="npk-label npk-label--k"><span>K</span>Potassium</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AVAILABLE ON ===================== -->
+  <section class="marketplace-bar" id="marketplaces">
+    <div class="container">
+      <p class="marketplace-label">Available on Your Favorite Platforms</p>
+      <div class="marketplace-grid">
+        {MARKETPLACES.map(m => (
+          <a href={m.url} target="_blank" rel="noopener" class="marketplace-link" aria-label={`Shop on ${m.name}`}>
+            <span class="marketplace-icon">
+              <Icon name={m.icon} width="20" height="20" />
+            </span>
+            <span class="marketplace-name">{m.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
   <section class="cta-banner" id="cta-banner">
     <div class="container cta-banner__inner">
       <div class="cta-text">
@@ -143,6 +224,51 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
       </a>
     </div>
   </section>
+
+  <script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Animations
+    window.addEventListener('load', () => {
+      const tl = gsap.timeline();
+      
+      tl.from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' })
+        .from('.hero-headline', { opacity: 0, y: 30, duration: 1, ease: 'power3.out' }, '-=0.4')
+        .from('.hero-sub', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+        .from('.hero-actions .btn', { opacity: 0, scale: 0.9, stagger: 0.2, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.4')
+        .from('.hero-badge', { opacity: 0, x: -20, stagger: 0.1, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+        .from('.hero-image-wrap', { opacity: 0, x: 50, duration: 1.2, ease: 'power3.out' }, '-=1');
+    });
+
+    // Staggered reveals for benefit cards
+    gsap.from('.benefit-card', {
+      scrollTrigger: {
+        trigger: '.benefits-grid',
+        start: 'top 80%',
+      },
+      opacity: 0,
+      y: 40,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: 'power3.out'
+    });
+    
+    // NPK Stats animation
+    gsap.from('.lab-stats li', {
+      scrollTrigger: {
+        trigger: '.lab-stats',
+        start: 'top 85%',
+      },
+      opacity: 0,
+      scale: 0.9,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: 'back.out(1.2)'
+    });
+  </script>
 </BaseLayout>
 
 <style>
@@ -551,6 +677,146 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
+/* ===== LAB RESULTS ===== */
+.lab-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.lab-stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-block: 2.5rem;
+}
+
+.lab-stats li {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: var(--cream);
+  border-radius: 1rem;
+  border: 1px solid var(--cream-dark);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.stat-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+}
+
+.npk-chart {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin-inline: auto;
+}
+
+.npk-circle {
+  position: absolute;
+  inset: 15%;
+  background: var(--green-dark);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-warm);
+  box-shadow: 0 20px 40px rgba(27,67,50,0.3);
+  z-index: 2;
+}
+
+.npk-title { font-weight: 700; font-size: 1.25rem; }
+.npk-subtitle { font-size: 0.75rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.1em; }
+
+.npk-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-mid);
+}
+
+.npk-label span {
+  width: 48px;
+  height: 48px;
+  background: var(--white-warm);
+  border: 2px solid var(--green-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--green-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.npk-label--n { top: -20px; left: 50%; transform: translateX(-50%); }
+.npk-label--p { bottom: 20px; left: -20px; }
+.npk-label--k { bottom: 20px; right: -20px; }
+
+/* ===== MARKETPLACE BAR ===== */
+.marketplace-bar {
+  background: var(--cream);
+  padding-block: 3rem;
+  border-top: 1px solid var(--cream-dark);
+}
+
+.marketplace-label {
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.marketplace-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.marketplace-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--white-warm);
+  border: 1px solid var(--cream-dark);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.marketplace-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-color: var(--green-light);
+}
+
+.marketplace-icon { color: var(--green-primary); }
+.marketplace-name { font-weight: 700; color: var(--green-dark); font-size: 0.9375rem; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; text-align: center; }
@@ -560,11 +826,16 @@ import { PRODUCTS, TRUST_BADGES } from '../lib/constants';
   .products-grid { grid-template-columns: 1fr; max-width: 400px; margin-inline: auto; }
   .benefits-grid { grid-template-columns: repeat(2, 1fr); }
   .cta-banner__inner { flex-direction: column; text-align: center; }
+  .lab-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .lab-visual { order: -1; }
 }
 
 @media (max-width: 600px) {
   .benefits-grid { grid-template-columns: 1fr; }
   .trust-bar__inner { gap: 1.25rem; }
   .trust-divider { display: none; }
+  .lab-stats { grid-template-columns: 1fr; }
+  .marketplace-grid { gap: 1rem; }
+  .marketplace-link { width: 100%; justify-content: center; }
 }
 </style>

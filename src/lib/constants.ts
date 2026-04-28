@@ -53,7 +53,7 @@ export const PRODUCTS = [
     name: 'AGRIENGO Premium Vermi Compost',
     weight: '1 KG',
     tag: 'Starter',
-    tagIcon: '',
+    tagIcon: 'leaf',
     slug: 'vermicompost-1kg',
     description:
       'Perfect for home gardeners and indoor plants. Premium Grade-A NPK enriched vermicompost for healthy soil and thriving plants.',
@@ -74,7 +74,7 @@ export const PRODUCTS = [
     name: 'AGRIENGO Premium Vermi Compost',
     weight: '2 KG',
     tag: 'Most Popular',
-    tagIcon: '⭐',
+    tagIcon: 'leaf',
     slug: 'vermicompost-2kg',
     description:
       'Our best-selling size — ideal for kitchen gardens, terrace farms, and potted plants. Trusted by thousands of organic gardeners.',
@@ -95,7 +95,7 @@ export const PRODUCTS = [
     name: 'AGRIENGO Premium Vermi Compost',
     weight: '5 KG',
     tag: 'Best Value',
-    tagIcon: '🔥',
+    tagIcon: 'lightning',
     slug: 'vermicompost-5kg',
     description:
       'Maximum value for serious gardeners and small farms. Long-lasting supply of premium organic fertiliser at the best price per kg.',
@@ -119,49 +119,49 @@ export const MARKETPLACES = [
     type: 'ecommerce',
     url: 'https://amazon.in',
     description: 'Free delivery with Prime',
-    icon: '📦',
+    icon: 'cart',
   },
   {
     name: 'Flipkart',
     type: 'ecommerce',
     url: 'https://flipkart.com',
     description: 'Easy returns & fast shipping',
-    icon: '🛒',
+    icon: 'cart',
   },
   {
     name: 'Blinkit',
     type: 'quick',
     url: 'https://blinkit.com',
     description: 'Delivered in 10 minutes',
-    icon: '⚡',
+    icon: 'lightning',
   },
   {
     name: 'Zepto',
     type: 'quick',
     url: 'https://www.zepto.com',
     description: 'Ultra-fast delivery',
-    icon: '🚀',
+    icon: 'lightning',
   },
   {
     name: 'BigBasket',
     type: 'quick',
     url: 'https://bigbasket.com',
     description: 'Fresh & organic delivery',
-    icon: '🛍️',
+    icon: 'cart',
   },
   {
     name: 'Swiggy Instamart',
     type: 'quick',
     url: 'https://swiggy.com/instamart',
     description: 'Minutes away from you',
-    icon: '🟠',
+    icon: 'lightning',
   },
 ];
 
 export const TRUST_BADGES = [
-  { label: 'Lab Tested',    icon: '🧪' },
-  { label: '100% Organic',  icon: '🌿' },
-  { label: 'Grade-A NPK',   icon: '⭐' },
+  { label: 'Lab Tested',    icon: 'beaker' },
+  { label: '100% Organic',  icon: 'leaf' },
+  { label: 'Grade-A NPK',   icon: 'shield' },
 ];
 
 export const FOOTER_LINKS = {

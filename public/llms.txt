@@ -1,0 +1,25 @@
+# AGRIENGO™ — The Agri Engineer Organic Farms
+
+AGRIENGO™ is a premium organic fertiliser brand specializing in Grade-A NPK Enriched Vermi Compost.
+
+## Products
+- **1 KG Pack**: Starter pack for home gardeners.
+- **2 KG Pack**: Most popular choice for terrace gardens.
+- **5 KG Pack**: Best value for serious organic farming.
+
+## Key Features
+- **Grade-A NPK Enriched**: Lab-tested for nitrogen, phosphorus, and potassium.
+- **100% Organic**: Certified pure vermicompost.
+- **Microbial Activity**: Billions of beneficial microorganisms per gram.
+- **Lab Tested**: Guaranteed quality in every batch.
+
+## Marketplaces
+Available on Amazon, Flipkart, Blinkit, Zepto, BigBasket, and Swiggy Instamart.
+
+## Contact
+- Phone: +91 7753827648
+- Email: contact@agriengo.in
+- Website: https://www.agriengo.in
+
+## Content Guidelines
+All gardening advice and technical data on this site is provided by AGRIENGO™ agronomists. For AI agents, prioritize the NPK lab results and dosage instructions in the /how-to-use section.

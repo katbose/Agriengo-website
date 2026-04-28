@@ -1,0 +1,262 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PRODUCTS } from '../../lib/constants';
+import Icon from '../../components/global/Icon.astro';
+import ProductSpecs from '../../components/products/ProductSpecs.astro';
+
+export async function getStaticPaths() {
+  return PRODUCTS.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<BaseLayout 
+  title={product.name} 
+  description={product.description}
+>
+  <div class="product-page">
+    <section class="product-hero container">
+      <div class="product-hero__grid">
+        <div class="product-visual reveal">
+          <div class="product-visual__bg"></div>
+          <img 
+            src="/images/products/adriengo_vermiCompost_1kg.png" 
+            alt={product.name} 
+            class="product-main-img"
+          />
+          {product.tag && (
+            <div class="product-visual__badge">
+              <Icon name={product.tagIcon} width="16" height="16" />
+              {product.tag}
+            </div>
+          )}
+        </div>
+
+        <div class="product-info reveal">
+          <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <Icon name="arrow-right" width="12" height="12" />
+            <a href="/products">Products</a>
+            <Icon name="arrow-right" width="12" height="12" />
+            <span>{product.weight} Pack</span>
+          </nav>
+
+          <h1 class="product-title">{product.name} — {product.weight}</h1>
+          <p class="product-description">{product.description}</p>
+
+          <div class="product-benefits-list">
+            <h3 class="benefit-title">Key Benefits</h3>
+            <ul>
+              {product.benefits.map(benefit => (
+                <li>
+                  <Icon name="check" width="18" height="18" />
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="product-purchase">
+            <h3 class="purchase-title">Available on Marketplaces</h3>
+            <div class="purchase-grid">
+              {Object.entries(product.buyLinks).map(([key, value]) => (
+                <a href={value} target="_blank" rel="noopener" class={`btn btn--purchase btn--${key}`}>
+                  Shop on {key.charAt(0).toUpperCase() + key.slice(1)}
+                  <Icon name="external-link" width="16" height="16" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream">
+      <div class="container">
+        <div class="specs-section-grid">
+          <div class="specs-text reveal">
+            <h2 class="section-heading">Engineered for Excellence</h2>
+            <p class="section-subheading">Our vermicompost is not just organic waste — it's a precisely controlled biological product designed to provide immediate and long-term soil health.</p>
+            
+            <div class="use-case">
+              <h4 class="use-case-title">Best For:</h4>
+              <ul class="use-case-list">
+                <li>Terrace & Kitchen Gardens</li>
+                <li>Indoor & Ornamental Plants</li>
+                <li>Fruit Trees & Lawns</li>
+                <li>Seedling Starters</li>
+              </ul>
+            </div>
+          </div>
+          <div class="specs-container reveal">
+            <ProductSpecs />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+.product-page { padding-top: var(--nav-height); }
+
+.product-hero { padding-block: 4rem; }
+
+.product-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+.product-visual {
+  position: relative;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--green-pale) 100%);
+  border-radius: 2rem;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.product-main-img {
+  max-width: 320px;
+  width: 100%;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+}
+
+.product-visual__badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--gold);
+  color: var(--green-darkest);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a { color: inherit; text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--green-primary); }
+
+.product-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--green-dark);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.product-description {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-mid);
+  margin-bottom: 2.5rem;
+}
+
+.benefit-title, .purchase-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.product-benefits-list ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.product-benefits-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--text-mid);
+}
+
+.product-benefits-list li :global(svg) { color: var(--green-mid); }
+
+.purchase-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn--purchase {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn--amazon { background: #232f3e; color: white; }
+.btn--flipkart { background: #2874f0; color: white; }
+
+.btn--purchase:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+.specs-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.use-case { margin-top: 2rem; }
+.use-case-title { font-weight: 700; color: var(--green-dark); margin-bottom: 1rem; }
+.use-case-list { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 0.5rem;
+  list-style: none;
+}
+.use-case-list li {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.use-case-list li::before {
+  content: "•";
+  color: var(--green-primary);
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .product-hero__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .product-visual { min-height: 400px; padding: 2rem; }
+  .specs-section-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .product-benefits-list ul { grid-template-columns: 1fr; }
+  .use-case-list { grid-template-columns: 1fr; }
+  .purchase-grid .btn { width: 100%; justify-content: center; }
+}
+</style>

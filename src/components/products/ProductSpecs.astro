@@ -1,0 +1,113 @@
+---
+import Icon from '../global/Icon.astro';
+
+export interface Props {
+  moisture?: string;
+  nitrogen?: string;
+  phosphorus?: string;
+  potassium?: string;
+  organicCarbon?: string;
+  cnRatio?: string;
+}
+
+const { 
+  moisture = "25-30%", 
+  nitrogen = "1.5 - 2.5%", 
+  phosphorus = "1.0 - 1.5%", 
+  potassium = "1.5 - 2.0%",
+  organicCarbon = "> 16%",
+  cnRatio = "< 20"
+} = Astro.props;
+
+const specs = [
+  { label: 'Moisture', value: moisture, icon: 'droplet' },
+  { label: 'Nitrogen (N)', value: nitrogen, icon: 'seedling' },
+  { label: 'Phosphorus (P)', value: phosphorus, icon: 'leaf' },
+  { label: 'Potassium (K)', value: potassium, icon: 'shield' },
+  { label: 'Organic Carbon', value: organicCarbon, icon: 'beaker' },
+  { label: 'C:N Ratio', value: cnRatio, icon: 'molecule' },
+];
+---
+
+<div class="specs-card reveal">
+  <h3 class="specs-title">Technical Specifications</h3>
+  <div class="specs-grid">
+    {specs.map(spec => (
+      <div class="spec-item">
+        <div class="spec-icon">
+          <Icon name={spec.icon} width="20" height="20" />
+        </div>
+        <div class="spec-info">
+          <span class="spec-label">{spec.label}</span>
+          <span class="spec-value">{spec.value}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+.specs-card {
+  background: var(--white-warm);
+  border: 1px solid var(--cream-dark);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}
+
+.specs-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spec-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--cream);
+  color: var(--green-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spec-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+}
+
+.spec-value {
+  font-weight: 700;
+  color: var(--green-dark);
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .specs-grid { grid-template-columns: 1fr; }
+}
+</style>
