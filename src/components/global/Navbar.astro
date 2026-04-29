@@ -314,11 +314,13 @@ const pathname = Astro.url.pathname;
     z-index: 1000;
     backdrop-filter: blur(4px);
     opacity: 0;
+    pointer-events: none; /* Block interactions only when open */
     transition: opacity 0.3s ease;
   }
 
   .mobile-backdrop.open {
     opacity: 1;
+    pointer-events: auto; /* Enable interactions when open */
   }
 
   /* ===== RESPONSIVE ===== */
