@@ -1,7 +1,9 @@
----
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/global/Icon.astro';
 import { CONTACT, SOCIAL } from '../lib/constants';
+
+const faqs = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout 
@@ -96,15 +98,45 @@ import { CONTACT, SOCIAL } from '../lib/constants';
     </div>
   </section>
 
-  <section class="section section--cream">
-    <div class="container text-center reveal">
-      <h2 class="section-heading">Frequently Asked Questions</h2>
-      <p class="section-subheading">Maybe we've already answered your question? Check our user guides.</p>
-      <div class="mt-8">
-        <a href="/how-to-use#faq" class="btn btn--outline-dark">Browse FAQs</a>
+  <section class="section section--green" id="faq">
+    <div class="container container--narrow">
+      <h2 class="section-heading section-heading--light text-center reveal">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <div class="faq-item reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <button class="faq-question">
+              <span>{faq.data.question}</span>
+              <Icon name="arrow-right" width="20" height="20" class="faq-icon" />
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer__inner">
+                <p>{faq.body}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
+
+  <script>
+    // FAQ Accordion Logic
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item?.classList.contains('active');
+        
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        
+        // Open current if it was closed
+        if (!isOpen && item) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
@@ -232,5 +264,56 @@ import { CONTACT, SOCIAL } from '../lib/constants';
   .form-row { grid-template-columns: 1fr; }
   .form-card { padding: 2rem; }
   .social-grid { grid-template-columns: 1fr; }
+}
+.container--narrow { max-width: 800px; }
+
+/* FAQ */
+.faq-list { margin-top: 3rem; }
+
+.faq-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item.active { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--white-warm);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-icon { transition: transform 0.3s ease; }
+.faq-item.active .faq-icon { transform: rotate(90deg); color: var(--gold); }
+
+.faq-answer {
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-item.active .faq-answer { max-height: 500px; }
+
+.faq-answer__inner { padding: 0 1.5rem 1.5rem; }
+.faq-answer p { font-size: 0.9375rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+.section--green {
+  background: var(--green-dark);
+}
+
+.section-heading--light {
+  color: var(--white-warm);
 }
 </style>

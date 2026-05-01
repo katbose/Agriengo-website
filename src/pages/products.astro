@@ -1,6 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/global/Icon.astro';
 import { PRODUCTS } from '../lib/constants';
+
+const faqs = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.order);
 
 const productSchema = PRODUCTS.map(p => ({
   "@context": "https://schema.org/",
@@ -74,6 +78,45 @@ const productSchema = PRODUCTS.map(p => ({
       </div>
     </div>
   </section>
+  <section class="section section--cream" id="faq">
+    <div class="container container--narrow">
+      <h2 class="section-heading text-center reveal">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <div class="faq-item reveal" style={`transition-delay: ${i * 0.1}s`}>
+            <button class="faq-question">
+              <span>{faq.data.question}</span>
+              <Icon name="arrow-right" width="20" height="20" class="faq-icon" />
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer__inner">
+                <p>{faq.body}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // FAQ Accordion Logic
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item?.classList.contains('active');
+        
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        
+        // Open current if it was closed
+        if (!isOpen && item) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
@@ -229,6 +272,50 @@ const productSchema = PRODUCTS.map(p => ({
   background: var(--green-primary);
   color: var(--white-warm);
 }
+
+.container--narrow { max-width: 800px; }
+
+/* FAQ */
+.faq-list { margin-top: 3rem; }
+
+.faq-item {
+  background: var(--white-warm);
+  border: 1px solid var(--cream-dark);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item.active { border-color: var(--gold); box-shadow: 0 4px 20px rgba(212,168,67,0.1); }
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--green-dark);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-icon { transition: transform 0.3s ease; color: var(--green-primary); }
+.faq-item.active .faq-icon { transform: rotate(90deg); color: var(--gold); }
+
+.faq-answer {
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-item.active .faq-answer { max-height: 500px; }
+
+.faq-answer__inner { padding: 0 1.5rem 1.5rem; }
+.faq-answer p { font-size: 0.9375rem; color: var(--text-mid); line-height: 1.6; }
 
 @media (max-width: 900px) {
   .product-row, .product-row--reverse {
