@@ -11,7 +11,7 @@ export const BRAND = {
 };
 
 export const CONTACT = {
-  phone: '+91 7753827648',
+  phone: '+91 7733827448',
   email: 'contact@agriengo.in',
   website: 'www.agriengo.in',
   cellLabel: 'Consumer Wellness Cell',
